@@ -14,7 +14,7 @@ export function EcommerceProductGrid({
   title = "GỢI Ý HÔM NAY DÀNH RIÊNG CHO BẠN",
 }: EcommerceProductGridProps) {
   const [activeTab, setActiveTab] = useState<string>("all");
-  const [displayCount, setDisplayCount] = useState<number>(8);
+  const [displayCount, setDisplayCount] = useState<number>(12);
 
   const tabs = [
     { id: "all", label: "Tất Cả" },
@@ -78,8 +78,8 @@ export function EcommerceProductGrid({
           })}
         </div>
 
-        {/* Marketplace Grid (2 cols mobile, 3 tablet, 4 desktop) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+        {/* Marketplace Grid (2 cols mobile, 3 tablet, 4-6 desktop) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 sm:gap-4">
           {visibleProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -96,7 +96,7 @@ export function EcommerceProductGrid({
           <div className="text-center mt-8">
             <button
               type="button"
-              onClick={() => setDisplayCount((prev) => prev + 4)}
+              onClick={() => setDisplayCount((prev) => prev + 6)}
               className="bg-white hover:bg-stone-50 text-stone-800 font-bold px-8 py-3 rounded-xl border border-stone-300 hover:border-amber-700 shadow-xs text-xs sm:text-sm uppercase tracking-wider transition-colors cursor-pointer"
             >
               Xem Thêm Sản Phẩm Khác ({filtered.length - displayCount})

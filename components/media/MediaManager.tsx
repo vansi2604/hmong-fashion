@@ -77,8 +77,37 @@ export function MediaManager({
   }, [selectedFolder, selectedMediaType, skip, limit]);
 
   useEffect(() => {
-    fetchMediaList();
-  }, [fetchMediaList]);
+    let ignore = false;
+    const loadMedia = async () => {
+      const params: MediaListParams = {
+        folder: selectedFolder || undefined,
+        media_type: selectedMediaType === 'ALL' ? undefined : selectedMediaType,
+        skip,
+        limit,
+      };
+
+      try {
+        const data = await mediaService.getList(params);
+        if (!ignore) {
+          setFiles(data);
+        }
+      } catch (err: unknown) {
+        if (!ignore) {
+          setErrorMessage((err as { message?: string })?.message || 'Không thể tải danh sách tệp tin');
+        }
+      } finally {
+        if (!ignore) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    loadMedia();
+
+    return () => {
+      ignore = true;
+    };
+  }, [selectedFolder, selectedMediaType, skip, limit]);
 
   // Reset skip về 0 khi đổi folder hoặc loại media
   const handleSelectFolder = (folder: string | null) => {

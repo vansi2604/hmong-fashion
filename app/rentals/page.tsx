@@ -21,8 +21,16 @@ export default function RentalsStorefrontPage() {
 
   // Modal Đặt Thuê State
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState(() => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return tomorrow.toISOString().split("T")[0];
+  });
+  const [endDate, setEndDate] = useState(() => {
+    const dayAfter = new Date();
+    dayAfter.setDate(dayAfter.getDate() + 3);
+    return dayAfter.toISOString().split("T")[0];
+  });
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [depositAmount, setDepositAmount] = useState(300000);
@@ -38,19 +46,6 @@ export default function RentalsStorefrontPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingError, setBookingError] = useState<string | null>(null);
   const [createdBooking, setCreatedBooking] = useState<RentalBookingResponse | null>(null);
-
-  // Khởi tạo ngày mặc định (Ngày mai và ngày kia)
-  useEffect(() => {
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const dayAfter = new Date(today);
-    dayAfter.setDate(dayAfter.getDate() + 3);
-
-    const fmt = (d: Date) => d.toISOString().split("T")[0];
-    setStartDate(fmt(tomorrow));
-    setEndDate(fmt(dayAfter));
-  }, []);
 
   // Nạp danh sách sản phẩm có cho thuê (rental_price_per_day > 0)
   useEffect(() => {
@@ -154,7 +149,7 @@ export default function RentalsStorefrontPage() {
 
   return (
     <main className="min-h-screen py-8 sm:py-12 bg-[#faf8f5]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-xs text-stone-500 mb-4">
           <Link href="/" className="hover:text-amber-800 transition-colors">
@@ -248,7 +243,7 @@ export default function RentalsStorefrontPage() {
               Đang tải danh sách trang phục cho thuê...
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
               {products.map((item) => (
                 <div
                   key={item.id}

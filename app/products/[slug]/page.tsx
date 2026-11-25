@@ -243,23 +243,22 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               {/* CTA Buttons: Mua Đứt & Thuê Trang Phục */}
               <div className="flex flex-col sm:flex-row items-center gap-3 pt-4 border-t border-stone-100">
                 {/* Nút Mua Hàng */}
-                <button
-                  type="button"
-                  disabled={!product.stock || product.stock <= 0}
-                  className="w-full sm:flex-1 py-3 px-4 rounded-xl border-2 border-rose-600 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                <Link
+                  href="/cart"
+                  className="w-full sm:flex-1 py-3 px-4 rounded-xl border-2 border-rose-600 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer text-center"
                 >
                   <span>🛒</span>
-                  <span>{product.stock && product.stock > 0 ? 'Thêm Vào Giỏ' : 'Hết Hàng Bán'}</span>
-                </button>
+                  <span>{product.stock && product.stock > 0 ? 'Thêm Vào Giỏ Hàng' : 'Xem Giỏ Hàng'}</span>
+                </Link>
 
                 {/* Nút Thuê Trang Phục */}
-                <button
-                  type="button"
-                  className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm shadow-md transition-colors cursor-pointer flex items-center justify-center gap-2"
+                <Link
+                  href="/rentals"
+                  className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm shadow-md transition-colors cursor-pointer flex items-center justify-center gap-2 text-center"
                 >
                   <span>👘</span>
                   <span>Thuê Trang Phục</span>
-                </button>
+                </Link>
               </div>
 
               {/* Guarantees */}

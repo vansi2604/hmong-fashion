@@ -1,5 +1,68 @@
 import Link from "next/link";
-import { MOCK_CATEGORIES } from "@/lib/mock-data";
+import type { Category } from "@/types/product";
+
+const QUICK_CATEGORIES: Category[] = [
+  {
+    id: "ao-khoac",
+    name: "Áo Khoác Thổ Cẩm",
+    icon: "🧥",
+    imageUrl: "",
+    itemCount: 128,
+    isHot: true,
+  },
+  {
+    id: "vay-dam",
+    name: "Váy Đầm Cách Tân",
+    icon: "👗",
+    imageUrl: "",
+    itemCount: 94,
+    isHot: true,
+  },
+  {
+    id: "ao-so-mi",
+    name: "Áo Sơ Mi Linen",
+    icon: "👔",
+    imageUrl: "",
+    itemCount: 65,
+  },
+  {
+    id: "phu-kien",
+    name: "Bạc & Khăn Choàng",
+    icon: "💍",
+    imageUrl: "",
+    itemCount: 182,
+    isHot: true,
+  },
+  {
+    id: "tui-vi",
+    name: "Túi Tote & Ví Thêu",
+    icon: "👜",
+    imageUrl: "",
+    itemCount: 47,
+  },
+  {
+    id: "flash-sale",
+    name: "Flash Sale Sốc",
+    icon: "⚡",
+    imageUrl: "",
+    itemCount: 20,
+    isHot: true,
+  },
+  {
+    id: "set-truyen-thong",
+    name: "Set Cưới Truyền Thống",
+    icon: "👘",
+    imageUrl: "",
+    itemCount: 36,
+  },
+  {
+    id: "thu-cong",
+    name: "Họa Tiết Sáp Ong",
+    icon: "🎨",
+    imageUrl: "",
+    itemCount: 52,
+  },
+];
 
 export function CategoryQuickLinks() {
   return (
@@ -16,7 +79,7 @@ export function CategoryQuickLinks() {
 
         {/* 8 Circular category icons */}
         <div className="grid grid-cols-4 sm:grid-cols-8 gap-3 sm:gap-4">
-          {MOCK_CATEGORIES.map((cat) => (
+          {QUICK_CATEGORIES.map((cat) => (
             <Link
               key={cat.id}
               href={`/products?category=${cat.id}`}

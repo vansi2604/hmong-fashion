@@ -17,9 +17,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "HMONG.MALL | Sàn Thương Mại Thời Trang & Thủ Công Hmong",
+  title: "HMONG.MALL | Cửa Hàng Trực Tuyến",
   description:
     "Sàn thương mại điện tử chuyên trang phục Hmong cách tân, áo khoác thổ cẩm, may đo cá nhân hóa, khăn batik sáp ong và trang sức bạc Sa Pa.",
+  icons: {
+    icon: "/images/logo.jpg",
+    apple: "/images/logo.jpg",
+  },
 };
 
 export default function RootLayout({

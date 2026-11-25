@@ -23,6 +23,14 @@
 # misc
 .DS_Store
 *.pem
+Thumbs.db
+test_*.txt
+*.tmp
+*.log
+
+# mock & test scratch
+/lib/mock-data*
+/scratch/
 
 # debug
 npm-debug.log*

@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/contexts/auth-context";
+import { BrandLogo } from "@/components/common/BrandLogo";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -45,23 +46,7 @@ export default function DashboardControlLayout({ children }: DashboardLayoutProp
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-15 gap-4">
             {/* Logo & Nhãn Phân Hệ Nội Bộ */}
-            <Link
-              href="/dashboard_control"
-              className="flex items-center gap-3 group focus:outline-none flex-shrink-0"
-              title="Về Bảng Điều Khiển Tổng Quan"
-            >
-              <div className="w-9 h-9 rounded-xl bg-amber-600 group-hover:bg-amber-500 text-stone-950 flex items-center justify-center font-serif font-black text-lg shadow-sm transition-colors">
-                H
-              </div>
-              <div className="flex flex-col">
-                <span className="font-serif text-sm sm:text-base font-black tracking-wider text-white uppercase leading-none">
-                  HMONG<span className="text-amber-400">.CONTROL</span>
-                </span>
-                <span className="text-[9px] tracking-widest text-stone-400 uppercase font-semibold mt-0.5">
-                  Bảng Điều Khiển Quản Trị
-                </span>
-              </div>
-            </Link>
+            <BrandLogo size="sm" variant="admin" href="/dashboard_control" />
 
             {/* Menu Công Cụ Quản Trị Nội Bộ (Desktop Navigation) */}
             <nav className="hidden lg:flex items-center gap-1 bg-stone-900/90 p-1.5 rounded-2xl border border-stone-800 text-xs font-semibold">

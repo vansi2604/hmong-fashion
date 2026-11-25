@@ -1,8 +1,39 @@
 "use client";
 
 import { useState } from "react";
-import { MOCK_VOUCHERS } from "@/lib/mock-data";
 import { formatVND } from "@/lib/utils";
+import type { Voucher } from "@/types/product";
+
+const VOUCHERS_LIST: Voucher[] = [
+  {
+    id: "v-01",
+    code: "HMOOB50K",
+    discountText: "GIẢM 50.000₫",
+    minSpend: 499000,
+    expiry: "HSD: 30/11/2026",
+  },
+  {
+    id: "v-02",
+    code: "FREESHIP300K",
+    discountText: "FREESHIP 0Đ",
+    minSpend: 300000,
+    expiry: "HSD: Còn 5 ngày",
+  },
+  {
+    id: "v-03",
+    code: "HMOOB100K",
+    discountText: "GIẢM 100.000₫",
+    minSpend: 1200000,
+    expiry: "HSD: 30/11/2026",
+  },
+  {
+    id: "v-04",
+    code: "TAILOR200K",
+    discountText: "MAY ĐO GIẢM 200K",
+    minSpend: 2500000,
+    expiry: "HSD: Cuối tuần này",
+  },
+];
 
 export function VoucherStrip() {
   const [claimedCodes, setClaimedCodes] = useState<string[]>([]);
@@ -25,7 +56,7 @@ export function VoucherStrip() {
 
         {/* Voucher Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {MOCK_VOUCHERS.map((voucher) => {
+          {VOUCHERS_LIST.map((voucher) => {
             const isClaimed = claimedCodes.includes(voucher.code);
 
             return (

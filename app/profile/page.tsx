@@ -41,11 +41,13 @@ export default function ProfilePage() {
   }, [isLoading, isAuthenticated, router]);
 
   useEffect(() => {
-    if (user) {
+    if (!user) return;
+    const timer = setTimeout(() => {
       setFullName(user.profile?.full_name || "");
       setAddress(user.profile?.address || "");
       setAvatarUrl(user.profile?.avatar_url || "");
-    }
+    }, 0);
+    return () => clearTimeout(timer);
   }, [user]);
 
   // Upload Avatar
@@ -164,7 +166,7 @@ export default function ProfilePage() {
 
   return (
     <main className="min-h-screen py-8 sm:py-12 bg-stone-100/60">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Breadcrumb & Title */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <div>

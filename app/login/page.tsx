@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/contexts/auth-context";
 import { getErrorMessage } from "@/lib/errors";
+import { BrandLogo } from "@/components/common/BrandLogo";
 
 function LoginForm() {
   const router = useRouter();
@@ -44,14 +45,9 @@ function LoginForm() {
   return (
     <div className="w-full max-w-md bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-stone-200">
       <div className="text-center mb-8">
-        <Link href="/" className="inline-flex items-center gap-2 group mb-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-700 to-stone-900 text-white flex items-center justify-center font-serif font-black text-xl shadow-xs">
-            H
-          </div>
-          <span className="font-serif text-2xl font-black tracking-wider text-stone-900 uppercase">
-            HMONG<span className="text-rose-600">.MALL</span>
-          </span>
-        </Link>
+        <div className="flex justify-center mb-4">
+          <BrandLogo size="md" variant="auth" />
+        </div>
         <h1 className="text-2xl font-serif font-bold text-stone-900">
           Chào mừng trở lại
         </h1>

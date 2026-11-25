@@ -58,8 +58,42 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    fetchCurrentUser();
-  }, [fetchCurrentUser]);
+    let ignore = false;
+
+    const initAuth = async () => {
+      // Chuyển sang microtask để tránh gọi setState đồng bộ trong Effect gây cascading renders
+      await Promise.resolve();
+      if (ignore) return;
+
+      if (!authService.hasToken()) {
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        const userData = await authService.getMe();
+        if (!ignore) {
+          setUser(userData);
+        }
+      } catch {
+        // Token lỗi hoặc hết hạn và refresh thất bại
+        authService.logout();
+        if (!ignore) {
+          setUser(null);
+        }
+      } finally {
+        if (!ignore) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    initAuth();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   // Hành động Đăng nhập
   const login = async (payload: LoginRequest) => {

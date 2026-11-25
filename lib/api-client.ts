@@ -1,16 +1,29 @@
 import type { TokenResponse } from '@/types/api';
 
+const getBaseApiUrl = (): string => {
+  const envUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api/v1').trim().replace(/\/+$/, '');
+  return envUrl.endsWith('/api/v1') ? envUrl : `${envUrl}/api/v1`;
+};
+
+const getBackendServerUrl = (): string => {
+  if (process.env.NEXT_PUBLIC_BASE_URL) {
+    return process.env.NEXT_PUBLIC_BASE_URL.trim().replace(/\/+$/, '');
+  }
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL.trim().replace(/\/api\/v1\/?$/, '').replace(/\/+$/, '');
+  }
+  return 'http://127.0.0.1:8000';
+};
+
 /**
  * Base URL cho Backend FastAPI
  */
-export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api/v1';
+export const API_BASE_URL = getBaseApiUrl();
 
 /**
  * Base URL tĩnh cho static uploads (hình ảnh, video)
  */
-export const BACKEND_SERVER_URL =
-  process.env.NEXT_PUBLIC_BASE_URL || 'http://127.0.0.1:8000';
+export const BACKEND_SERVER_URL = getBackendServerUrl();
 
 /**
  * Helper hàm nối URL hình ảnh từ API tương đối (/uploads/...) thành URL tuyệt đối

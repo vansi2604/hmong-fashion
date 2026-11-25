@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/contexts/auth-context";
 import { getImageUrl } from "@/lib/api-client";
+import { BrandLogo } from "@/components/common/BrandLogo";
 
 export function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -55,22 +56,10 @@ export function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
         <div className="flex items-center justify-between gap-4 lg:gap-8">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 flex-shrink-0 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-700 to-stone-900 text-white flex items-center justify-center font-serif font-black text-xl shadow-xs">
-              H
-            </div>
-            <div className="flex flex-col">
-              <span className="font-serif text-xl sm:text-2xl font-black tracking-wider text-stone-900 group-hover:text-amber-800 transition-colors uppercase leading-none">
-                HMONG<span className="text-rose-600">.MALL</span>
-              </span>
-              <span className="text-[9px] tracking-widest text-stone-500 uppercase font-semibold mt-0.5">
-                Chợ Thời Trang Bản Địa
-              </span>
-            </div>
-          </Link>
+          <BrandLogo size="md" variant="storefront" />
 
           {/* Large Marketplace Search Bar */}
-          <div className="hidden sm:flex flex-1 max-w-2xl flex-col">
+          <div className="hidden sm:flex flex-1 max-w-3xl xl:max-w-4xl flex-col">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -254,7 +243,7 @@ export function Navbar() {
               </div>
               <div className="hidden xl:flex flex-col text-left">
                 <span className="text-[10px] text-amber-800 font-semibold leading-none">Giỏ hàng</span>
-                <span className="text-xs font-bold text-stone-900 leading-tight">Giỏ hàng</span>
+                <span className="text-xs font-bold text-stone-900 leading-tight">Mua sắm</span>
               </div>
             </Link>
 

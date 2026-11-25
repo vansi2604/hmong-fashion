@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { NewsletterForm } from "./NewsletterForm";
+import { BrandLogo } from "./BrandLogo";
 
 export function Footer() {
   return (
@@ -8,23 +9,16 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
           {/* Brand & Culture Vision */}
           <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="inline-block">
-              <span className="font-serif text-2xl font-extrabold tracking-widest text-white uppercase">
-                H M O N G
-              </span>
-              <span className="block text-[10px] tracking-[0.25em] text-amber-500 uppercase font-sans">
-                Fashion & Heritage
-              </span>
-            </Link>
+            <BrandLogo size="md" variant="footer" />
             <p className="text-sm text-stone-400 max-w-sm leading-relaxed">
               Chúng tôi bảo tồn và làm mới các giá trị văn hóa trang phục truyền thống của đồng bào Hmong thông qua thiết kế thời trang ứng dụng cao cấp. Mỗi sản phẩm là một câu chuyện về đất trời và con người vùng cao.
             </p>
             <div className="flex items-center space-x-3 text-stone-400 pt-2">
               <span className="text-xs bg-stone-800 px-3 py-1.5 rounded-full border border-stone-700">
-                Làng nghề Tả Van, Sa Pa
+                Thuê trang phục Hmong cho sự kiện
               </span>
               <span className="text-xs bg-stone-800 px-3 py-1.5 rounded-full border border-stone-700">
-                100% Nhuộm Chàm Tự Nhiên
+                May theo đo & thiết kế riêng
               </span>
             </div>
           </div>
@@ -101,7 +95,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 mt-8 border-t border-stone-800 text-xs text-stone-500 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© 2026 HMONG Fashion. Bản quyền thuộc về cộng đồng sáng tạo văn hóa Hmong.</p>
+          <p>© 2026 HMONG Fashion. Bản quyền thuộc về HMONG FASHIONS</p>
           <div className="flex space-x-6">
             <Link href="/privacy" className="hover:text-stone-300 transition-colors">
               Chính sách bảo mật

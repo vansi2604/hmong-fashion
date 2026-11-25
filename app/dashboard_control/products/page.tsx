@@ -82,8 +82,41 @@ export default function DashboardProductsPage() {
   }, [selectedCategory, debouncedSearch]);
 
   useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+    let ignore = false;
+    const load = async () => {
+      try {
+        const params: ProductListParams = {
+          category: selectedCategory === 'ALL' ? undefined : selectedCategory,
+          search: debouncedSearch || undefined,
+          skip: 0,
+          limit: 100,
+        };
+        const data = await productService.getProducts(params);
+        if (!ignore) {
+          setProducts(data || []);
+        }
+      } catch (err: unknown) {
+        console.error('Lỗi nạp sản phẩm từ Backend API:', err);
+        const msg =
+          (err as { message?: string })?.message ||
+          'Không thể kết nối đến Backend API /api/v1/products/. Vui lòng đảm bảo server FastAPI đang chạy.';
+        if (!ignore) {
+          setErrorMessage(msg);
+          setProducts([]);
+        }
+      } finally {
+        if (!ignore) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    load();
+
+    return () => {
+      ignore = true;
+    };
+  }, [selectedCategory, debouncedSearch]);
 
   // Lọc sản phẩm ở client (Trạng thái hiển thị & Tồn kho)
   const filteredProducts = useMemo(() => {

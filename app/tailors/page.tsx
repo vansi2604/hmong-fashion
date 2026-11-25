@@ -74,11 +74,13 @@ export default function TailorBookingPage() {
 
   // Prefill user data if logged in
   useEffect(() => {
-    if (user) {
-      if (user.profile?.full_name) setCustomerName(user.profile.full_name);
-      if (user.phone) setCustomerPhone(user.phone);
-      if (user.profile?.address) setCustomerAddress(user.profile.address);
-    }
+    if (!user) return;
+    const timer = setTimeout(() => {
+      if (user.profile?.full_name) setCustomerName((prev) => prev || user.profile?.full_name || "");
+      if (user.phone) setCustomerPhone((prev) => prev || user.phone || "");
+      if (user.profile?.address) setCustomerAddress((prev) => prev || user.profile?.address || "");
+    }, 0);
+    return () => clearTimeout(timer);
   }, [user]);
 
   // Upload custom design image (Public upload folder "tailors")
@@ -152,7 +154,7 @@ export default function TailorBookingPage() {
 
   return (
     <main className="min-h-screen py-8 sm:py-12 bg-[#faf8f5]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-xs text-stone-500 mb-4">
           <Link href="/" className="hover:text-amber-800 transition-colors">

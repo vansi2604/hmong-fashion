@@ -40,23 +40,29 @@ export function FlashSaleSection({ products: initialProducts }: FlashSaleSection
   // Nạp sản phẩm từ Backend API nếu chưa được truyền vào
   useEffect(() => {
     if (initialProducts && initialProducts.length > 0) {
-      setProducts(initialProducts);
       return;
     }
 
+    let ignore = false;
     const fetchFlashSales = async () => {
       try {
         const data = await productService.getProducts({ limit: 8 });
-        setProducts(data || []);
+        if (!ignore) {
+          setProducts(data || []);
+        }
       } catch (err) {
         console.warn("Không thể tải sản phẩm flash sale từ API:", err);
       }
     };
 
     fetchFlashSales();
+
+    return () => {
+      ignore = true;
+    };
   }, [initialProducts]);
 
-  const flashSaleItems = products.slice(0, 4);
+  const flashSaleItems = products.slice(0, 6);
 
   const formatDigits = (num: number) => num.toString().padStart(2, "0");
 
@@ -104,7 +110,7 @@ export function FlashSaleSection({ products: initialProducts }: FlashSaleSection
         </div>
 
         {/* Flash Sale Product Row / Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4">
           {flashSaleItems.map((product, idx) => {
             const soldCount = product.soldCount ?? (idx + 1) * 12;
             const discountPercent =
